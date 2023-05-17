@@ -1,5 +1,5 @@
 {
-  "name": "requests",
+  "name": "@entneo/entneo-api-kit",
   "version": "1.0.0",
   "description": "general request template",
   "main": "index.js",

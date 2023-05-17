@@ -4,7 +4,7 @@ import { mentor } from './mentor'
 import { account } from './account'
 import { job } from './job'
 
-export const requests = (auth: any) => ({
+export const EntneoRequests = (auth: any) => ({
   index: () => {
     return 'null'
   },
@@ -24,3 +24,13 @@ export const requests = (auth: any) => ({
   mentor: mentor(auth),
   job: job(auth)
 })
+
+export const EntneoMethods = {
+  isOkRes: (response: axiosRes | [axiosRes]) => {
+    utils.asArray(response).forEach(element => {
+      if (parseInt(element.status.toString().charAt(0)) === 2) return true
+      console.log('Request was unsuccessful: ' + element.status)
+      return false
+    })
+  }
+}
