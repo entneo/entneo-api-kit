@@ -7,9 +7,12 @@ const utils = {
 
   withHeaders: (auth: string) => {
     return { headers: { Authorization: auth } }
-  },
+  }
+}
 
-  asResponse: <T>(obj: AnyObject, schema: responseType) => {
+//transformers
+const as = {
+  response: <T>(obj: AnyObject, schema: responseType) => {
     const response: AnyObject = responseMaps[schema]
     obj.forEach((element: string) => {
       response[element] = element
@@ -17,9 +20,13 @@ const utils = {
     return response as T
   },
 
-  asArray: (response: axiosRes | [axiosRes]) => {
-    return Array.isArray(response) ? response : [response]
+  array: (param: axiosRes | [axiosRes]) => {
+    return Array.isArray(param) ? param : [param]
+  },
+
+  object: (param: any | AnyObject) => {
+    return Object.keys(param).length > 0 ? param : { 0: param }
   }
 }
 
-export default { ...utils }
+export { utils, as }

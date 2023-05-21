@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import utils from './utils'
+import { utils, as } from './utils'
 //todo clean up response mapper and use globally
 
 export const account = (auth: string) => ({
@@ -10,9 +10,9 @@ export const account = (auth: string) => ({
   get: async (cookie: string) => {
     try {
       const { data, status } = await axios.get(`${utils.env.baseUrl}/account/${cookie}`, utils.withHeaders(auth))
-      return utils.asResponse({ data, status }, 'accountGet')
+      return as.response({ data, status }, 'accountGet')
     } catch (error: AxiosResponse | any) {
-      return utils.asResponse({ data: error.response.data, status: error.response.status }, 'accountGet')
+      return as.response({ data: error.response.data, status: error.response.status }, 'accountGet')
     }
   },
 
