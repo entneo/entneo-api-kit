@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import utils from './utils'
+import { utils, as } from './utils'
 
 //copied
 export const job = (auth: string) => ({
@@ -7,12 +7,29 @@ export const job = (auth: string) => ({
    * gets user data by named cookie
    * this cookie is not a validator and should never be used as one, its an alternative to username
    */
-  get: async (cookie: string) => {
+  get: async (ref: string) => {
     try {
-      const { data, status } = await axios.get(`${utils.env.baseUrl}/account/${cookie}`, utils.withHeaders(auth))
-      return { data, status }
+      if (ref.length > 10) {
+        //a way to check if job is 3rd party list
+        return as.response(await axios.get(`${utils.env.jobListing}/${ref}`, utils.withHeaders(auth)), 'ok') //change the auth
+      } else {
+        return as.response(await axios.get(`${utils.env.baseUrl}/reep${ref}`, utils.withHeaders(auth)), 'ok')
+      }
     } catch (error: AxiosResponse | any) {
-      return { data: error.response.data, status: error.response.status }
+      return as.errorResponse(error)
+    }
+  },
+
+  getSome: async (ref: string) => {
+    try {
+      if (ref.length > 10) {
+        //a way to check if job is 3rd party list
+        return as.response(await axios.get(`${utils.env.jobListing}/${ref}`, utils.withHeaders(auth)), 'ok') //change the auth
+      } else {
+        return as.response(await axios.get(`${utils.env.baseUrl}/reep${ref}`, utils.withHeaders(auth)), 'ok')
+      }
+    } catch (error: AxiosResponse | any) {
+      return as.errorResponse(error)
     }
   },
 

@@ -1,18 +1,16 @@
 import axios, { AxiosResponse } from 'axios'
 import { utils, as } from './utils'
-//todo clean up response mapper and use globally
 
 export const account = (auth: string) => ({
   /**
    * gets user data by named cookie
-   * this cookie is not a validator and should never be used as one, its an alternative to username
+   * this cookie is not a validator and should never be used as one, its an alternative to username identifier
    */
   get: async (cookie: string) => {
     try {
-      const { data, status } = await axios.get(`${utils.env.baseUrl}/account/${cookie}`, utils.withHeaders(auth))
-      return as.response({ data, status }, 'accountGet')
+      return as.response(await axios.get(`${utils.env.baseUrl}/account/${cookie}`, utils.withHeaders(auth)), 'ok')
     } catch (error: AxiosResponse | any) {
-      return as.response({ data: error.response.data, status: error.response.status }, 'accountGet')
+      return as.errorResponse(error)
     }
   },
 

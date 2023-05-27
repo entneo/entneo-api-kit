@@ -1,21 +1,25 @@
-type responseType = 'accountGet' | 'accountPut' | 'accountDelete'
+type responseType = 'accountGet' | 'accountPut' | 'accountDelete' | 'error' | 'ok'
 
 const responseMaps = {
+  error: {
+    data: {},
+    status: {}
+  },
+  ok: {
+    data: {},
+    status: {}
+  },
   accountGet: {
-    getPayload: ['body'],
-    links: ['body', '_links'],
-    response: [''],
-    statusCode: ['status']
+    data: {},
+    status: {}
   },
   accountPut: {
-    getPayload: ['body'],
-    response: [''],
-    statusCode: ['status']
+    data: {},
+    status: {}
   },
   accountDelete: {
-    paymentResponse: [''],
-    createPayload: ['body'],
-    paymentId: ['body', 'id']
+    data: {},
+    status: {}
   }
 }
 
