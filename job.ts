@@ -20,7 +20,7 @@ export const job = (auth: string) => ({
     }
   },
 
-  getSome: async (ref: string) => {
+  getSome: async (ref: string, advances?: AnyObject) => {
     try {
       if (ref.length > 10) {
         //a way to check if job is 3rd party list

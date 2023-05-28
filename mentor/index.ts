@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from 'axios'
-import utils from '../utils'
+import { utils } from '../utils'
 
 export const mentor = (auth: string) => ({
   /**
