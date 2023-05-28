@@ -3,24 +3,23 @@ import { mentor } from './mentor'
 import { account } from './account'
 import { job } from './job'
 import { status } from './statuses'
+import { EntneoInit, axiosRes } from './types/index'
 
-export const entneoRequests: AnyObject = (auth: any) => ({
+export const entneoRequests = (request: EntneoInit) => ({
   index: () => {
     return 'null'
   },
 
-  status: status(auth),
-  account: account(auth),
-  mentor: mentor(auth),
-  job: job(auth)
+  status: status(request),
+  account: account(request),
+  mentor: mentor(request),
+  job: job(request)
 })
 
-export const entneoMethods: AnyObject = {
+export const entneoMethods = {
   isOkRes: (response: axiosRes | [axiosRes]) => {
-    as.array(response).forEach(element => {
-      if (parseInt(element.status.toString().charAt(0)) === 2) return true
-      console.log('Request was unsuccessful: ' + element.status)
-      return false
+    return as.array(response).every(element => {
+      return parseInt(element.status.toString().charAt(0)) === 2
     })
   }
 }

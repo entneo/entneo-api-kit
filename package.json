@@ -2,10 +2,10 @@
   "name": "@entneo/entneo-api-kit",
   "version": "1.0.0",
   "description": "general request template",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "test",
-    "build": "rimraf dist & npx tsc -w",
+    "build": "rimraf dist && npx tsc",
     "pretty": "npx prettier --check ."
   },
   "keywords": [

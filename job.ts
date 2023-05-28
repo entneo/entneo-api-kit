@@ -1,8 +1,9 @@
 import axios, { AxiosResponse } from 'axios'
 import { utils, as } from './utils'
+import { AnyObject, EntneoInit} from './types/index'
 
 //copied
-export const job = (auth: string) => ({
+export const job = (req: EntneoInit) => ({
   /**
    * gets user data by named cookie
    * this cookie is not a validator and should never be used as one, its an alternative to username
@@ -11,9 +12,9 @@ export const job = (auth: string) => ({
     try {
       if (ref.length > 10) {
         //a way to check if job is 3rd party list
-        return as.response(await axios.get(`${utils.env.jobListing}/${ref}`, utils.withHeaders(auth)), 'ok') //change the auth
+        return as.response(await axios.get(`${req.apiUrl}/${ref}`, utils.withHeaders(req.auth)), 'ok') //change the auth
       } else {
-        return as.response(await axios.get(`${utils.env.baseUrl}/reep${ref}`, utils.withHeaders(auth)), 'ok')
+        return as.response(await axios.get(`${req.apiUrl}/reep${ref}`, utils.withHeaders(req.auth)), 'ok')
       }
     } catch (error: AxiosResponse | any) {
       return as.errorResponse(error)
@@ -24,9 +25,9 @@ export const job = (auth: string) => ({
     try {
       if (ref.length > 10) {
         //a way to check if job is 3rd party list
-        return as.response(await axios.get(`${utils.env.jobListing}/${ref}`, utils.withHeaders(auth)), 'ok') //change the auth
+        return as.response(await axios.get(`${utils.env.jobListing}/${ref}`, utils.withHeaders(req.auth)), 'ok') //change the auth
       } else {
-        return as.response(await axios.get(`${utils.env.baseUrl}/reep${ref}`, utils.withHeaders(auth)), 'ok')
+        return as.response(await axios.get(`${req.apiUrl}/reep${ref}`, utils.withHeaders(req.auth)), 'ok')
       }
     } catch (error: AxiosResponse | any) {
       return as.errorResponse(error)

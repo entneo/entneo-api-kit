@@ -1,9 +1,9 @@
 import { responseMaps, responseType } from './data'
+import { AnyObject, axiosRes } from './types/index'
 
 const utils = {
   env: {
-    baseUrl: process.env.baseApiUrl,
-    jobListing: process.env.baseApiUrl
+    jobListing: 'https://some url'
   },
 
   withHeaders: (auth: string) => {
@@ -13,12 +13,13 @@ const utils = {
 
 //transformers
 const as = {
-  response: <T>(obj: AnyObject, schema: responseType) => {
+  response: (obj: AnyObject, schema: responseType) => {
     const response: AnyObject = responseMaps[schema]
     obj.forEach((element: string) => {
+      //todo breaks on inactive api, cus res is undefined, fix
       response[element] = obj[element]
     })
-    return response as T
+    return response as axiosRes
   },
 
   errorResponse: (error: AnyObject) => {
