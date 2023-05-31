@@ -1,5 +1,6 @@
 import { responseMaps, responseType } from './data'
 import { AnyObject, axiosRes } from './types/index'
+import { serviceTemplate } from './schema/templates'
 
 const utils = {
   env: {
@@ -15,10 +16,15 @@ const utils = {
 const as = {
   response: (obj: AnyObject, schema: responseType) => {
     const response: AnyObject = responseMaps[schema]
-    obj.forEach((element: string) => {
-      //todo breaks on inactive api, cus res is undefined, fix
-      response[element] = obj[element]
-    })
+    if (obj.data != undefined) {
+      obj.forEach((element: string) => {
+        response[element] = obj[element]
+      })
+    } else {
+      Object.assign(response, {
+        ...serviceTemplate.emptyRequest
+      })
+    }
     return response as axiosRes
   },
 
