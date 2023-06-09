@@ -4,7 +4,7 @@ import { serviceTemplate } from './schema/templates'
 
 const utils = {
   env: {
-    jobListing: 'https://some url'
+    jobListing: 'https://rapidapi.com/indeed/api/indeed'//todo implement
   },
 
   withHeaders: (auth: string) => {
