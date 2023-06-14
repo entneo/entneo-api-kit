@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 import { utils, as } from './utils'
-import { AnyObject, EntneoInit} from './types/index'
+import { AnyObject, EntneoInit } from './types/index'
 
 //copied
 export const job = (req: EntneoInit) => ({
@@ -23,9 +23,9 @@ export const job = (req: EntneoInit) => ({
 
   getSome: async (ref: string, advances?: AnyObject) => {
     try {
-      if (ref.length > 10) {
-        //a way to check if job is 3rd party list
-        return as.response(await axios.get(`${utils.env.jobListing}/${ref}`, utils.withHeaders(req.auth)), 'ok') //change the auth
+      if (advances != undefined) {
+        advances.q = ref
+        return as.response(await axios.get(`${utils.env.jobListing}`, { ...advances }), 'ok')
       } else {
         return as.response(await axios.get(`${req.apiUrl}/reep${ref}`, utils.withHeaders(req.auth)), 'ok')
       }
