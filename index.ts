@@ -3,6 +3,7 @@ import { mentor } from './mentor'
 import { account } from './account'
 import { job } from './job'
 import { status } from './statuses'
+import { service } from './service'
 import { EntneoInit, axiosRes } from './types/index'
 
 export const entneoRequests = (request: EntneoInit) => ({
@@ -13,7 +14,8 @@ export const entneoRequests = (request: EntneoInit) => ({
   status: status(request),
   account: account(request),
   mentor: mentor(request),
-  job: job(request)
+  job: job(request),
+  service: service(request)
 })
 
 export const entneoMethods = {
