@@ -15,13 +15,12 @@ export const entneoRequests = (request: EntneoInit) => ({
   account: account(request),
   mentor: mentor(request),
   job: job(request),
-  service: service(request)
-})
-
-export const entneoMethods = {
-  isOkRes: (response: axiosRes | [axiosRes]) => {
-    return as.array(response).every(element => {
-      return parseInt(element.status.toString().charAt(0)) === 2
-    })
+  service: service(request),
+  methods: {
+    isOkRes: (response: axiosRes | [axiosRes]) => {
+      return as.array(response).every(element => {
+        return parseInt(element.status.toString().charAt(0)) === 2
+      })
+    }
   }
-}
+})

@@ -1,6 +1,6 @@
 {
   "name": "@entneo/entneo-api-kit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "general request template",
   "main": "dist/index.js",
   "scripts": {
